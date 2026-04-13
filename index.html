@@ -49,6 +49,9 @@
 
 <body>
 
+  <!-- 🎵 HIDDEN MUSIC PLAYER -->
+  <iframe id="musicFrame" width="0" height="0" style="display:none;"></iframe>
+
   <div id="terminal"></div>
   <span class="cursor"></span>
 
@@ -86,6 +89,10 @@
     }
 
     function goNext() {
+      // 🎵 ADA THEME (YouTube embed)
+      document.getElementById("musicFrame").src =
+        "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
+
       window.location.href = "main.html";
     }
 
