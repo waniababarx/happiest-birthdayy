@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happiest Birthday</title>
+
+  <style>
+    body {
+      background-color: black;
+      color: #00ff9f;
+      font-family: "Courier New", monospace;
+      padding: 40px;
+    }
+
+    #terminal {
+      white-space: pre-line;
+      font-size: 18px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background: #00ff9f;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% {opacity: 1;}
+      50% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+
+    #enterBtn {
+      display: none;
+      margin-top: 30px;
+      padding: 10px 20px;
+      border: 2px solid #00ff9f;
+      background: black;
+      color: #00ff9f;
+      cursor: pointer;
+    }
+
+    #enterBtn:hover {
+      background: #00ff9f;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="terminal"></div>
+  <span class="cursor"></span>
+
+  <br><br>
+  <button id="enterBtn" onclick="goNext()">ENTER SYSTEM</button>
+
+  <script>
+    const text = [
+      "UMBRELLA CORPORATION SYSTEM",
+      "Initializing...",
+      "Loading subject data...",
+      "Scanning...",
+      "ERROR: Unknown emotional anomaly detected",
+      "Opening confidential file..."
+    ];
+
+    let i = 0;
+    let j = 0;
+
+    function typeLine() {
+      if (i < text.length) {
+        if (j < text[i].length) {
+          document.getElementById("terminal").innerHTML += text[i].charAt(j);
+          j++;
+          setTimeout(typeLine, 30);
+        } else {
+          document.getElementById("terminal").innerHTML += "\n";
+          i++;
+          j = 0;
+          setTimeout(typeLine, 500);
+        }
+      } else {
+        document.getElementById("enterBtn").style.display = "block";
+      }
+    }
+
+    function goNext() {
+      window.location.href = "main.html";
+    }
+
+    typeLine();
+  </script>
+
+</body>
+</html>
