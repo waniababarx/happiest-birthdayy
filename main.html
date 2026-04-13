@@ -42,85 +42,91 @@
 
 <body>
 
-  <!-- 🎵 MUSIC ADDED HERE (NO OTHER CHANGES) -->
-  <iframe width="0" height="0"
-  src="https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8"
-  frameborder="0"
-  allow="autoplay">
-  </iframe>
-
   <h1 class="glitch">UMBELLA ARCHIVE // CLASSIFIED ACCESS</h1>
 
-  <div class="file">
+  <!-- 🧠 GRID SYSTEM (FEELS LIKE GAME MENU) -->
+  <div style="display:grid; gap:15px; max-width:800px;">
 
-    <p><strong>SUBJECT:</strong> AHMAD</p>
-    <p><strong>STATUS:</strong> T-Virus Exposure: Emotional Variant 🧪</p>
+    <!-- 📁 SUBJECT FILE -->
+    <div class="file" onclick="toggle('a1')">
+      📁 SUBJECT FILE: AHMAD
+      <div id="a1" style="display:none; margin-top:10px;">
+        Status: T-Virus Emotional Variant 🧪<br>
+        Classification: NON-TERMINAL BUT SIGNIFICANT
+      </div>
+    </div>
 
-    <br>
+    <!-- 🧟 LEON QUOTES (CLICK TO REVEAL) -->
+    <div class="file" onclick="toggle('a2')">
+      🧟 LEON S. KENNEDY LOGS
+      <div id="a2" style="display:none; margin-top:10px;">
+        “No matter how dark the night gets… survival means moving forward.”<br><br>
+        “I’ve seen enough horror to know what matters most — people like you.”
+      </div>
+    </div>
 
-    <p><strong>MISSION BRIEFING:</strong></p>
-    <p>
-      You are now accessing a restricted Umbrella Corporation emotional file.
-      This data contains unauthorized human sentiment classified under “Leon Kennedy Protocol”.
-    </p>
+    <!-- 🧪 SYSTEM BRIEFING -->
+    <div class="file" onclick="toggle('a3')">
+      🧪 SYSTEM DIAGNOSTIC
+      <div id="a3" style="display:none; margin-top:10px;">
+        Subject shows no physical infection.<br>
+        Emotional load: EXTREMELY HIGH<br>
+        Result: Memory imprint detected in operator.
+      </div>
+    </div>
 
-    <br>
+    <!-- 📂 STAGE 01 -->
+    <div class="file" onclick="toggle('a4')">
+      📂 STAGE 01: SEALED LETTER ARCHIVE
+      <div id="a4" style="display:none; margin-top:10px;">
 
-    <p><strong>🧟 LEON S. KENNEDY LOGS:</strong></p>
-    <p>
-      “No matter how dark the night gets… survival means moving forward.”<br>
-      “I’ve seen enough horror to know what matters most — people like you.”
-    </p>
+        <p>Personal transmission logs detected.</p>
 
-    <br>
+        <a href="https://openwhenletters.app/c/fd450d61-9455-412f-95ec-e982eaf822bd/v/7a8e1f25ce0f037b114ea4c11bdf65c0617525f8f7b58e7626685218ec374cf3"
+           target="_blank">
+          ▶ OPEN LETTER FILE
+        </a>
 
-    <p><strong>☣️ SYSTEM NOTE:</strong></p>
-    <p>
-      Subject “Ahmad” shows no signs of physical infection.<br>
-      However, emotional impact levels are dangerously high.
-      Classified as: <strong>NON-TERMINAL BUT SIGNIFICANT</strong>.
-    </p>
+      </div>
+    </div>
 
-    <br>
+    <!-- 🎵 STAGE 02 -->
+    <div class="file" onclick="toggle('a5')">
+      🎵 STAGE 02: MEMORY CORE (SPOTIFY)
+      <div id="a5" style="display:none; margin-top:10px;">
 
-    <p><strong>📂 STAGE 01: SEALED LETTER ARCHIVE</strong></p>
+        <p>Audio reconstruction linked to Subject Ahmad.</p>
 
-    <p>
-      Access authorized: Personal transmission logs detected.
-    </p>
+        <a href="https://open.spotify.com/playlist/7MqcUYNqhbej0uLS9D4Pci?si=8997c552fbb54e2b&pt=d7fad82574fdde9b69f785e1ee3d39b8"
+           target="_blank">
+          ▶ ACCESS SOUNDTRACK
+        </a>
 
-    <a href="https://openwhenletters.app/c/fd450d61-9455-412f-95ec-e982eaf822bd/v/7a8e1f25ce0f037b114ea4c11bdf65c0617525f8f7b58e7626685218ec374cf3"
-       target="_blank">
-      ▶ OPEN LETTER FILE (CLASSIFIED)
-    </a>
+      </div>
+    </div>
 
-    <br><br>
+    <!-- 💀 FINAL MESSAGE -->
+    <div class="file" onclick="toggle('a6')">
+      💀 FINAL TRANSMISSION
+      <div id="a6" style="display:none; margin-top:10px;">
+        Ahmad…<br><br>
+        This file is not data.<br>
+        It is memory disguised as code.<br><br>
 
-    <p><strong>📂 STAGE 02: AUDIO MEMORY CORE</strong></p>
-
-    <p>
-      A reconstructed emotional soundtrack has been assigned to Subject Ahmad.
-    </p>
-
-    <a href="https://open.spotify.com/playlist/7MqcUYNqhbej0uLS9D4Pci?si=8997c552fbb54e2b&pt=d7fad82574fdde9b69f785e1ee3d39b8"
-       target="_blank">
-      ▶ ACCESS SPOTIFY SOUNDTRACK
-    </a>
-
-    <br><br>
-
-    <p><strong>FINAL MESSAGE:</strong></p>
-    <p>
-      Ahmad… this is not just a birthday file.<br>
-      It’s a recovered memory fragment from a timeline where distance doesn’t matter.<br><br>
-
-      You were never just a subject.<br>
-      You were the reason this file exists.
-    </p>
-
-    <p class="glitch"><strong>HAPPIEST BIRTHDAY — END TRANSMISSION 🖤</strong></p>
+        You were never just a subject.<br>
+        You were the reason this system exists.
+      </div>
+    </div>
 
   </div>
+
+  <!-- 🧠 TOGGLE SCRIPT -->
+  <script>
+    function toggle(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "none") ? "block" : "none";
+    }
+  </script>
 
 </body>
 </html>
