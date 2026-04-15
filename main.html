@@ -10,9 +10,41 @@ body {
   background: radial-gradient(circle at center, #050505 0%, #000000 100%);
   font-family: "Courier New", monospace;
   color: #00ff9f;
+  overflow-x: hidden;
 }
 
-/* MAIN CONTAINER */
+/* GRID OVERLAY (makes it feel like a system screen) */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0,255,159,0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,255,159,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* SCANLINE EFFECT */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,255,159,0.05) 50%, transparent 50%);
+  background-size: 100% 4px;
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  from {transform: translateY(0);}
+  to {transform: translateY(10px);}
+}
+
+/* CONTAINER */
 .container {
   max-width: 900px;
   margin: auto;
@@ -23,27 +55,29 @@ body {
 .header {
   font-size: 32px;
   color: red;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 15px red;
   margin-bottom: 30px;
   border-bottom: 1px solid red;
   padding-bottom: 10px;
+  letter-spacing: 2px;
 }
 
-/* FILE BOXES */
+/* FILE BOX */
 .file {
   border: 1px solid #00ff9f;
   padding: 20px;
   margin-bottom: 20px;
   background: rgba(0, 255, 159, 0.05);
-  box-shadow: 0 0 15px rgba(0,255,159,0.2);
+  box-shadow: 0 0 20px rgba(0,255,159,0.2);
   transition: 0.3s;
+  backdrop-filter: blur(2px);
 }
 
 .file:hover {
-  box-shadow: 0 0 25px rgba(0,255,159,0.5);
+  box-shadow: 0 0 30px rgba(0,255,159,0.6);
 }
 
-/* LOCKED EFFECT */
+/* LOCKED */
 .locked {
   border-color: red;
   color: #ff4d4d;
@@ -75,11 +109,6 @@ button:hover {
   color: black;
 }
 
-/* HIDDEN SECTIONS */
-.hidden {
-  display: none;
-}
-
 /* NEXT BUTTON */
 #nextBtn {
   display: none;
@@ -93,7 +122,7 @@ button:hover {
   color: black;
 }
 
-/* GLITCH TITLE */
+/* GLITCH */
 .glitch {
   animation: flicker 1.5s infinite;
 }
@@ -102,6 +131,11 @@ button:hover {
   0% {opacity: 1;}
   50% {opacity: 0.4;}
   100% {opacity: 1;}
+}
+
+/* HIDDEN */
+.hidden {
+  display: none;
 }
 </style>
 </head>
@@ -114,59 +148,79 @@ button:hover {
     UMBRELLA ARCHIVE // STAGE 01
   </div>
 
-  <!-- 🎂 BIRTHDAY SECTION -->
+  <!-- SYSTEM MESSAGE -->
   <div class="file">
     <strong>SYSTEM MESSAGE</strong><br><br>
 
     Date anomaly confirmed.<br>
     Subject Ahmad identified.<br><br>
 
-    Today is not a normal system day.<br>
-    It has been marked as significant.<br><br>
-
-    Status update:<br>
-    This system was activated for you.
+    A secondary file has been flagged.<br>
+    Access requires investigation.
   </div>
 
-  <!-- 🔒 LETTER LOCK -->
+  <!-- 🕵️ MURDER PUZZLE -->
   <div class="file locked">
+    <strong>INCIDENT REPORT</strong><br><br>
+
+    Case File: 08-17<br>
+    Location: Private residence<br><br>
+
+    A man was found dead on his birthday night.<br><br>
+
+    Suspects:<br>
+    - The Friend (left at 7 PM)<br>
+    - The Neighbor (heard nothing)<br>
+    - The Butler (served dinner at 9 PM)<br>
+    - The Sister (called at 10 PM)<br><br>
+
+    Evidence:<br>
+    - Body discovered at 11 PM<br>
+    - Victim was smiling<br>
+    - Cake untouched<br>
+    - A phone call occurred AFTER death<br><br>
+
+    Question:<br>
+    Who is lying?<br><br>
+
+    <input type="text" id="codeInput" placeholder="Enter suspect">
+    <br>
+    <button onclick="checkCode()">SUBMIT ANSWER</button>
+  </div>
+
+  <!-- 🔓 LETTER -->
+  <div id="letterSection" class="file hidden">
     <strong>SEALED LETTER ARCHIVE</strong><br><br>
 
-    File is encrypted.<br>
-    Access requires verification.<br><br>
+    Access granted.<br><br>
 
-    <em>Hint: Date anomaly (DDMM)</em><br>
-
-    <input type="text" id="codeInput" placeholder="Enter access code">
-    <br>
-    <button onclick="checkCode()">DECRYPT FILE</button>
-
-    <div id="letterSection" class="hidden">
-      <br>
-      Access granted.<br><br>
-
-      <a href="https://openwhenletters.app/c/fd450d61-9455-412f-95ec-e982eaf822bd/v/7a8e1f25ce0f037b114ea4c11bdf65c0617525f8f7b58e7626685218ec374cf3"
-         target="_blank"
-         style="color:#00ff9f; border:1px solid #00ff9f; padding:8px; text-decoration:none;">
-         OPEN LETTER FILE
-      </a>
-    </div>
+    <a href="https://openwhenletters.app/..."
+       target="_blank"
+       style="color:#00ff9f; border:1px solid #00ff9f; padding:8px; text-decoration:none;">
+       OPEN LETTER FILE
+    </a>
   </div>
 
-  <!-- ➡️ NEXT -->
+  <!-- NEXT -->
   <button id="nextBtn" onclick="nextPage()">PROCEED TO NEXT SECTOR</button>
 
 </div>
 
 <script>
 function checkCode() {
-  const code = document.getElementById("codeInput").value;
+  const code = document.getElementById("codeInput").value.toLowerCase().trim();
 
-  if (code === "1704") {
+  if (code === "sister") {
+
+    document.body.style.backgroundColor = "#100000"; // subtle effect
+
     document.getElementById("letterSection").style.display = "block";
     document.getElementById("nextBtn").style.display = "inline-block";
+
+    alert("Correct. Access granted.");
+
   } else {
-    alert("ACCESS DENIED");
+    alert("Incorrect. Re-evaluate the evidence.");
   }
 }
 
