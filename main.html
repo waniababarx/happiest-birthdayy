@@ -1,132 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Happiest Birthday</title>
+<meta charset="UTF-8">
+<title>Umbrella Archive - Stage 01</title>
 
-  <style>
-    body {
-      background: black;
-      color: red;
-      font-family: monospace;
-      padding: 40px;
-    }
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at center, #050505 0%, #000000 100%);
+  font-family: "Courier New", monospace;
+  color: #00ff9f;
+}
 
-    .file {
-      border: 1px solid red;
-      padding: 20px;
-      max-width: 600px;
-    }
+/* MAIN CONTAINER */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px;
+}
 
-    .glitch {
-      font-size: 30px;
-      animation: flicker 1.5s infinite;
-    }
+/* HEADER */
+.header {
+  font-size: 32px;
+  color: red;
+  text-shadow: 0 0 10px red;
+  margin-bottom: 30px;
+  border-bottom: 1px solid red;
+  padding-bottom: 10px;
+}
 
-    @keyframes flicker {
-      0% { opacity: 1; }
-      50% { opacity: 0.3; }
-      100% { opacity: 1; }
-    }
+/* FILE BOXES */
+.file {
+  border: 1px solid #00ff9f;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: rgba(0, 255, 159, 0.05);
+  box-shadow: 0 0 15px rgba(0,255,159,0.2);
+  transition: 0.3s;
+}
 
-    /* 🔗 added for links styling (does NOT change layout) */
-    a {
-      color: red;
-      text-decoration: none;
-      border: 1px solid red;
-      padding: 8px;
-      display: inline-block;
-      margin-top: 10px;
-    }
-  </style>
+.file:hover {
+  box-shadow: 0 0 25px rgba(0,255,159,0.5);
+}
+
+/* LOCKED EFFECT */
+.locked {
+  border-color: red;
+  color: #ff4d4d;
+  background: rgba(255,0,0,0.05);
+}
+
+/* INPUT */
+input {
+  background: black;
+  border: 1px solid #00ff9f;
+  color: #00ff9f;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+/* BUTTON */
+button {
+  background: black;
+  border: 1px solid #00ff9f;
+  color: #00ff9f;
+  padding: 8px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #00ff9f;
+  color: black;
+}
+
+/* HIDDEN SECTIONS */
+.hidden {
+  display: none;
+}
+
+/* NEXT BUTTON */
+#nextBtn {
+  display: none;
+  margin-top: 30px;
+  border-color: red;
+  color: red;
+}
+
+#nextBtn:hover {
+  background: red;
+  color: black;
+}
+
+/* GLITCH TITLE */
+.glitch {
+  animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+  0% {opacity: 1;}
+  50% {opacity: 0.4;}
+  100% {opacity: 1;}
+}
+</style>
 </head>
 
 <body>
 
-  <h1 class="glitch">UMBELLA ARCHIVE // CLASSIFIED ACCESS</h1>
+<div class="container">
 
-  <!-- 🧠 GRID SYSTEM (FEELS LIKE GAME MENU) -->
-  <div style="display:grid; gap:15px; max-width:800px;">
-
-    <!-- 📁 SUBJECT FILE -->
-    <div class="file" onclick="toggle('a1')">
-      📁 SUBJECT FILE: AHMAD
-      <div id="a1" style="display:none; margin-top:10px;">
-        Status: T-Virus Emotional Variant 🧪<br>
-        Classification: NON-TERMINAL BUT SIGNIFICANT
-      </div>
-    </div>
-
-    <!-- 🧟 LEON QUOTES (CLICK TO REVEAL) -->
-    <div class="file" onclick="toggle('a2')">
-      🧟 LEON S. KENNEDY LOGS
-      <div id="a2" style="display:none; margin-top:10px;">
-        “No matter how dark the night gets… survival means moving forward.”<br><br>
-        “I’ve seen enough horror to know what matters most — people like you.”
-      </div>
-    </div>
-
-    <!-- 🧪 SYSTEM BRIEFING -->
-    <div class="file" onclick="toggle('a3')">
-      🧪 SYSTEM DIAGNOSTIC
-      <div id="a3" style="display:none; margin-top:10px;">
-        Subject shows no physical infection.<br>
-        Emotional load: EXTREMELY HIGH<br>
-        Result: Memory imprint detected in operator.
-      </div>
-    </div>
-
-    <!-- 📂 STAGE 01 -->
-    <div class="file" onclick="toggle('a4')">
-      📂 STAGE 01: SEALED LETTER ARCHIVE
-      <div id="a4" style="display:none; margin-top:10px;">
-
-        <p>Personal transmission logs detected.</p>
-
-        <a href="https://openwhenletters.app/c/fd450d61-9455-412f-95ec-e982eaf822bd/v/7a8e1f25ce0f037b114ea4c11bdf65c0617525f8f7b58e7626685218ec374cf3"
-           target="_blank">
-          ▶ OPEN LETTER FILE
-        </a>
-
-      </div>
-    </div>
-
-    <!-- 🎵 STAGE 02 -->
-    <div class="file" onclick="toggle('a5')">
-      🎵 STAGE 02: MEMORY CORE (SPOTIFY)
-      <div id="a5" style="display:none; margin-top:10px;">
-
-        <p>Audio reconstruction linked to Subject Ahmad.</p>
-
-        <a href="https://open.spotify.com/playlist/7MqcUYNqhbej0uLS9D4Pci?si=8997c552fbb54e2b&pt=d7fad82574fdde9b69f785e1ee3d39b8"
-           target="_blank">
-          ▶ ACCESS SOUNDTRACK
-        </a>
-
-      </div>
-    </div>
-
-    <!-- 💀 FINAL MESSAGE -->
-    <div class="file" onclick="toggle('a6')">
-      💀 FINAL TRANSMISSION
-      <div id="a6" style="display:none; margin-top:10px;">
-        Ahmad…<br><br>
-        This file is not data.<br>
-        It is memory disguised as code.<br><br>
-
-        You were never just a subject.<br>
-        You were the reason this system exists.
-      </div>
-    </div>
-
+  <div class="header glitch">
+    UMBRELLA ARCHIVE // STAGE 01
   </div>
 
-  <!-- 🧠 TOGGLE SCRIPT -->
-  <script>
-    function toggle(id) {
-      const el = document.getElementById(id);
-      el.style.display = (el.style.display === "none") ? "block" : "none";
-    }
-  </script>
+  <!-- 🎂 BIRTHDAY SECTION -->
+  <div class="file">
+    <strong>SYSTEM MESSAGE</strong><br><br>
+
+    Date anomaly confirmed.<br>
+    Subject Ahmad identified.<br><br>
+
+    Today is not a normal system day.<br>
+    It has been marked as significant.<br><br>
+
+    Status update:<br>
+    This system was activated for you.
+  </div>
+
+  <!-- 🔒 LETTER LOCK -->
+  <div class="file locked">
+    <strong>SEALED LETTER ARCHIVE</strong><br><br>
+
+    File is encrypted.<br>
+    Access requires verification.<br><br>
+
+    <em>Hint: Date anomaly (DDMM)</em><br>
+
+    <input type="text" id="codeInput" placeholder="Enter access code">
+    <br>
+    <button onclick="checkCode()">DECRYPT FILE</button>
+
+    <div id="letterSection" class="hidden">
+      <br>
+      Access granted.<br><br>
+
+      <a href="https://openwhenletters.app/c/fd450d61-9455-412f-95ec-e982eaf822bd/v/7a8e1f25ce0f037b114ea4c11bdf65c0617525f8f7b58e7626685218ec374cf3"
+         target="_blank"
+         style="color:#00ff9f; border:1px solid #00ff9f; padding:8px; text-decoration:none;">
+         OPEN LETTER FILE
+      </a>
+    </div>
+  </div>
+
+  <!-- ➡️ NEXT -->
+  <button id="nextBtn" onclick="nextPage()">PROCEED TO NEXT SECTOR</button>
+
+</div>
+
+<script>
+function checkCode() {
+  const code = document.getElementById("codeInput").value;
+
+  if (code === "1704") {
+    document.getElementById("letterSection").style.display = "block";
+    document.getElementById("nextBtn").style.display = "inline-block";
+  } else {
+    alert("ACCESS DENIED");
+  }
+}
+
+function nextPage() {
+  window.location.href = "page2.html";
+}
+</script>
 
 </body>
 </html>
