@@ -45,9 +45,8 @@
       color: black;
     }
 
-    .secret {
+    .warning {
       color: red;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -72,7 +71,8 @@
       "",
       "Cross-referencing date... Match found: [17th April 2008]",
       "Not a threat.",
-      "[SECRET_WARNING]",
+      "",
+      "WARNING: No Blood is Ever free of its trace of fungal mold",
       "",
       "You can now open the confidential file."
     ];
@@ -87,40 +87,19 @@
 
         let line = text[i];
 
-      if (line === "[SECRET_WARNING]") {
-
-  if (j === 0) {
-    terminal.innerHTML += `<span id="secret" class="secret">████████████████████</span>`;
-  }
-
-  j = line.length;
-
-  const secret = document.getElementById("secret");
-
-  if (secret) {
-    secret.addEventListener("mouseenter", () => {
-      secret.textContent =
-        "WARNING: No Blood is Ever free of its trace of fungal mold";
-    });
-
-    secret.addEventListener("mouseleave", () => {
-      secret.textContent = "████████████████████";
-    });
-  }
-
-  terminal.innerHTML += "\n";
-  i++;
-  j = 0;
-
-  setTimeout(typeLine, 500);
-  return;
-}
-
         // NORMAL TYPING
         if (j < line.length) {
-          terminal.innerHTML += line.charAt(j);
+
+          // make warning line red
+          if (i === 7) {
+            terminal.innerHTML += `<span class="warning">` + line.charAt(j) + `</span>`;
+          } else {
+            terminal.innerHTML += line.charAt(j);
+          }
+
           j++;
           setTimeout(typeLine, 30);
+
         } else {
           terminal.innerHTML += "\n";
           i++;
