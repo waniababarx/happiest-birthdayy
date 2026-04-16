@@ -45,7 +45,6 @@
       color: black;
     }
 
-    /* 🔥 SECRET WARNING STYLE */
     .secret {
       color: red;
       cursor: pointer;
@@ -95,12 +94,12 @@
             terminal.innerHTML += `<span id="secret" class="secret">████████████████████</span>`;
           }
 
-          j++;
+          j = line.length;
 
-          if (j === 1) {
-            setTimeout(() => {
-              const secret = document.getElementById("secret");
+          setTimeout(() => {
+            const secret = document.getElementById("secret");
 
+            if (secret) {
               secret.onmouseenter = () => {
                 secret.textContent =
                   "WARNING: No Blood is Ever free of its trace of fungal mold";
@@ -109,10 +108,14 @@
               secret.onmouseleave = () => {
                 secret.textContent = "████████████████████";
               };
-            }, 500);
-          }
+            }
+          }, 500);
 
-          setTimeout(typeLine, 30);
+          terminal.innerHTML += "\n";
+          i++;
+          j = 0;
+
+          setTimeout(typeLine, 500);
           return;
         }
 
