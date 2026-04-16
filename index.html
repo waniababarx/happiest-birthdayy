@@ -44,6 +44,12 @@
       background: #00ff9f;
       color: black;
     }
+
+    /* 🔥 SECRET WARNING STYLE */
+    .secret {
+      color: red;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -67,7 +73,7 @@
       "",
       "Cross-referencing date... Match found: [17th April 2008]",
       "Not a threat.",
-      "<span style='color:black;'>WARNING: “No Blood is Ever free of its trace of fungal mold”</span>",
+      "[SECRET_WARNING]",
       "",
       "You can now open the confidential file."
     ];
@@ -76,24 +82,58 @@
     let j = 0;
 
     function typeLine() {
+      const terminal = document.getElementById("terminal");
+
       if (i < text.length) {
-        if (j < text[i].length) {
-          document.getElementById("terminal").innerHTML += text[i].charAt(j);
+
+        let line = text[i];
+
+        // 🔥 SECRET WARNING HANDLING
+        if (line === "[SECRET_WARNING]") {
+
+          if (j === 0) {
+            terminal.innerHTML += `<span id="secret" class="secret">████████████████████</span>`;
+          }
+
+          j++;
+
+          if (j === 1) {
+            setTimeout(() => {
+              const secret = document.getElementById("secret");
+
+              secret.onmouseenter = () => {
+                secret.textContent =
+                  "WARNING: No Blood is Ever free of its trace of fungal mold";
+              };
+
+              secret.onmouseleave = () => {
+                secret.textContent = "████████████████████";
+              };
+            }, 500);
+          }
+
+          setTimeout(typeLine, 30);
+          return;
+        }
+
+        // NORMAL TYPING
+        if (j < line.length) {
+          terminal.innerHTML += line.charAt(j);
           j++;
           setTimeout(typeLine, 30);
         } else {
-          document.getElementById("terminal").innerHTML += "\n";
+          terminal.innerHTML += "\n";
           i++;
           j = 0;
           setTimeout(typeLine, 500);
         }
+
       } else {
         document.getElementById("enterBtn").style.display = "block";
       }
     }
 
     function goNext() {
-      // 🎵 ADA THEME (YouTube embed)
       document.getElementById("musicFrame").src =
         "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
 
