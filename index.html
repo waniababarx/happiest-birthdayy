@@ -87,37 +87,34 @@
 
         let line = text[i];
 
-        // 🔥 SECRET WARNING HANDLING
-        if (line === "[SECRET_WARNING]") {
+      if (line === "[SECRET_WARNING]") {
 
-          if (j === 0) {
-            terminal.innerHTML += `<span id="secret" class="secret">████████████████████</span>`;
-          }
+  if (j === 0) {
+    terminal.innerHTML += `<span id="secret" class="secret">████████████████████</span>`;
+  }
 
-          j = line.length;
+  j = line.length;
 
-          setTimeout(() => {
-            const secret = document.getElementById("secret");
+  const secret = document.getElementById("secret");
 
-            if (secret) {
-              secret.onmouseenter = () => {
-                secret.textContent =
-                  "WARNING: No Blood is Ever Free of its Trace of Fungal Mold";
-              };
+  if (secret) {
+    secret.addEventListener("mouseenter", () => {
+      secret.textContent =
+        "WARNING: No Blood is Ever free of its trace of fungal mold";
+    });
 
-              secret.onmouseleave = () => {
-                secret.textContent = "████████████████████";
-              };
-            }
-          }, 500);
+    secret.addEventListener("mouseleave", () => {
+      secret.textContent = "████████████████████";
+    });
+  }
 
-          terminal.innerHTML += "\n";
-          i++;
-          j = 0;
+  terminal.innerHTML += "\n";
+  i++;
+  j = 0;
 
-          setTimeout(typeLine, 500);
-          return;
-        }
+  setTimeout(typeLine, 500);
+  return;
+}
 
         // NORMAL TYPING
         if (j < line.length) {
