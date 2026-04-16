@@ -13,7 +13,7 @@ body {
   overflow-x: hidden;
 }
 
-/* GRID OVERLAY (makes it feel like a system screen) */
+/* GRID OVERLAY */
 body::after {
   content: "";
   position: fixed;
@@ -27,7 +27,7 @@ body::after {
   pointer-events: none;
 }
 
-/* SCANLINE EFFECT */
+/* SCANLINE */
 body::before {
   content: "";
   position: fixed;
@@ -42,6 +42,30 @@ body::before {
 @keyframes scan {
   from {transform: translateY(0);}
   to {transform: translateY(10px);}
+}
+
+/* BOOT SCREEN (NEW ADDITION) */
+#bootScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: black;
+  color: red;
+
+  font-size: 24px;
+  text-align: center;
+
+  z-index: 9999;
+
+  animation: flicker 0.2s infinite;
 }
 
 /* CONTAINER */
@@ -142,6 +166,11 @@ button:hover {
 
 <body>
 
+<!-- 🔴 BOOT SCREEN (NEW ADDITION) -->
+<div id="bootScreen">
+  WARNING: No Blood is Ever free of its trace of fungal mold
+</div>
+
 <div class="container">
 
   <div class="header glitch">
@@ -212,7 +241,7 @@ function checkCode() {
 
   if (code === "sister") {
 
-    document.body.style.backgroundColor = "#100000"; // subtle effect
+    document.body.style.backgroundColor = "#100000";
 
     document.getElementById("letterSection").style.display = "block";
     document.getElementById("nextBtn").style.display = "inline-block";
@@ -227,6 +256,14 @@ function checkCode() {
 function nextPage() {
   window.location.href = "final.html";
 }
+
+/* BOOT SCREEN AUTO HIDE */
+window.onload = function () {
+  setTimeout(() => {
+    const screen = document.getElementById("bootScreen");
+    if (screen) screen.style.display = "none";
+  }, 3000);
+};
 </script>
 
 </body>
