@@ -1,73 +1,66 @@
 <script>
-  let text = [
-    "UMBRELLA CORPORATION SYSTEM",
-    "Initializing..."
-  ];
+const text = [
+  "UMBRELLA CORPORATION SYSTEM",
+  "Initializing...",
+  "Loading subject data...",
+  "ERROR CODE: E001",
+  "",
+  "Cross-referencing date... Match found: [17th April 2008]",
+  "Re-evaluating...",
+  "Not a threat.",
+  "",
+  "You can now open the confidential file..."
+];
 
-  let i = 0;
-  let j = 0;
+let i = 0;
+let j = 0;
+let waitingForName = false;
 
-  let nameEntered = false; // 👈 KEY FIX
+function typeLine() {
+  // ⛔ PAUSE after "Initializing..."
+  if (i === 2 && !waitingForName) {
+    waitingForName = true;
+    document.getElementById("nameSection").style.display = "block";
+    return;
+  }
 
-  function typeLine() {
-    if (i < text.length) {
-      if (j < text[i].length) {
-        document.getElementById("terminal").innerHTML += text[i].charAt(j);
-        j++;
-        setTimeout(typeLine, 30);
-      } else {
-        document.getElementById("terminal").innerHTML += "\n";
-        i++;
-        j = 0;
-        setTimeout(typeLine, 500);
-      }
+  if (i < text.length) {
+    if (j < text[i].length) {
+      document.getElementById("terminal").innerHTML += text[i].charAt(j);
+      j++;
+      setTimeout(typeLine, 30);
     } else {
-
-      if (!nameEntered) {
-        // FIRST TIME → ask for name
-        document.getElementById("nameSection").style.display = "block";
-      } else {
-        // AFTER NAME → show enter button
-        document.getElementById("enterBtn").style.display = "block";
-      }
-
+      document.getElementById("terminal").innerHTML += "\n";
+      i++;
+      j = 0;
+      setTimeout(typeLine, 500);
     }
+  } else {
+    document.getElementById("enterBtn").style.display = "block";
   }
+}
 
-  function submitName() {
-    const name = document.getElementById("nameInput").value.toLowerCase().trim();
+function submitName() {
+  const name = document.getElementById("nameInput").value.toLowerCase().trim();
 
-    if (name === "ahmad") {
+  if (name === "ahmad") {
+    document.getElementById("nameSection").style.display = "none";
 
-      nameEntered = true; // 👈 IMPORTANT
+    // OPTIONAL: adds one personalized line before continuing
+    document.getElementById("terminal").innerHTML += "Subject Ahmad identified.\n";
 
-      document.getElementById("nameSection").style.display = "none";
-
-      text = text.concat([
-        "Subject Ahmad identified.",
-        "Loading subject data...",
-        "ERROR CODE: E001",
-        "",
-        "Cross-referencing date... Match found: [17th April 2008]",
-        "Re-evaluating...",
-        "Not a threat.",
-        "",
-        "You can now open the confidential file..."
-      ]);
-
-      typeLine();
-
-    } else {
-      alert("ACCESS DENIED");
-    }
+    typeLine(); // continue typing rest
+  } else {
+    alert("ACCESS DENIED");
   }
+}
 
-  function goNext() {
-    document.getElementById("musicFrame").src =
-      "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
+function goNext() {
+  document.getElementById("musicFrame").src =
+    "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
 
-    window.location.href = "main.html";
-  }
+  window.location.href = "main.html";
+}
 
-  typeLine();
+typeLine();
 </script>
