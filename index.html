@@ -1,150 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Happiest Birthday</title>
+<script>
+  let text = [
+    "UMBRELLA CORPORATION SYSTEM",
+    "Initializing..."
+  ];
 
-  <style>
-    body {
-      background-color: black;
-      color: #00ff9f;
-      font-family: "Courier New", monospace;
-      padding: 40px;
-    }
+  let i = 0;
+  let j = 0;
 
-    #terminal {
-      white-space: pre-line;
-      font-size: 18px;
-    }
+  let nameEntered = false; // 👈 KEY FIX
 
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      background: #00ff9f;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0% {opacity: 1;}
-      50% {opacity: 0;}
-      100% {opacity: 1;}
-    }
-
-    #enterBtn {
-      display: none;
-      margin-top: 30px;
-      padding: 10px 20px;
-      border: 2px solid #00ff9f;
-      background: black;
-      color: #00ff9f;
-      cursor: pointer;
-    }
-
-    #enterBtn:hover {
-      background: #00ff9f;
-      color: black;
-    }
-
-    #nameSection {
-      display: none;
-      margin-top: 20px;
-    }
-
-    input {
-      background: black;
-      border: 1px solid #00ff9f;
-      color: #00ff9f;
-      padding: 5px;
-    }
-
-    button.small {
-      margin-left: 10px;
-      padding: 5px 10px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- 🎵 HIDDEN MUSIC PLAYER -->
-  <iframe id="musicFrame" width="0" height="0" style="display:none;"></iframe>
-
-  <div id="terminal"></div>
-  <span class="cursor"></span>
-
-  <!-- NAME INPUT -->
-  <div id="nameSection">
-    <br>
-    > ENTER SUBJECT NAME:
-    <input type="text" id="nameInput">
-    <button class="small" onclick="submitName()">CONFIRM</button>
-  </div>
-
-  <br><br>
-  <button id="enterBtn" onclick="goNext()">ENTER SYSTEM</button>
-
-  <script>
-    let text = [
-      "UMBRELLA CORPORATION SYSTEM",
-      "Initializing..."
-    ];
-
-    let i = 0;
-    let j = 0;
-
-    function typeLine() {
-      if (i < text.length) {
-        if (j < text[i].length) {
-          document.getElementById("terminal").innerHTML += text[i].charAt(j);
-          j++;
-          setTimeout(typeLine, 30);
-        } else {
-          document.getElementById("terminal").innerHTML += "\n";
-          i++;
-          j = 0;
-          setTimeout(typeLine, 500);
-        }
+  function typeLine() {
+    if (i < text.length) {
+      if (j < text[i].length) {
+        document.getElementById("terminal").innerHTML += text[i].charAt(j);
+        j++;
+        setTimeout(typeLine, 30);
       } else {
-        // show name input after initial text
+        document.getElementById("terminal").innerHTML += "\n";
+        i++;
+        j = 0;
+        setTimeout(typeLine, 500);
+      }
+    } else {
+
+      if (!nameEntered) {
+        // FIRST TIME → ask for name
         document.getElementById("nameSection").style.display = "block";
-      }
-    }
-
-    function submitName() {
-      const name = document.getElementById("nameInput").value.toLowerCase().trim();
-
-      if (name === "ahmad") {
-
-        document.getElementById("nameSection").style.display = "none";
-
-        // continue system text
-        text = text.concat([
-          "Subject Ahmad identified.",
-          "Loading subject data...",
-          "ERROR CODE: E001",
-          "",
-          "Cross-referencing date... Match found: [17th April 2008]",
-          "Not a threat.",
-          "",
-          "You can now open the confidential file."
-        ]);
-
-        typeLine();
-
       } else {
-        alert("ACCESS DENIED");
+        // AFTER NAME → show enter button
+        document.getElementById("enterBtn").style.display = "block";
       }
+
     }
+  }
 
-    function goNext() {
-      document.getElementById("musicFrame").src =
-        "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
+  function submitName() {
+    const name = document.getElementById("nameInput").value.toLowerCase().trim();
 
-      window.location.href = "main.html";
+    if (name === "ahmad") {
+
+      nameEntered = true; // 👈 IMPORTANT
+
+      document.getElementById("nameSection").style.display = "none";
+
+      text = text.concat([
+        "Subject Ahmad identified.",
+        "Loading subject data...",
+        "ERROR CODE: E001",
+        "",
+        "Cross-referencing date... Match found: [17th April 2008]",
+        "Re-evaluating...",
+        "Not a threat.",
+        "",
+        "You can now open the confidential file..."
+      ]);
+
+      typeLine();
+
+    } else {
+      alert("ACCESS DENIED");
     }
+  }
 
-    typeLine();
-  </script>
+  function goNext() {
+    document.getElementById("musicFrame").src =
+      "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
 
-</body>
-</html>
+    window.location.href = "main.html";
+  }
+
+  typeLine();
+</script>
