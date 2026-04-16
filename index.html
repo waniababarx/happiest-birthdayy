@@ -54,11 +54,6 @@
 
   <div id="terminal"></div>
   <span class="cursor"></span>
-  <div id="nameSection" style="display:none; margin-top:20px;">
-  > ENTER SUBJECT NAME:
-  <input type="text" id="nameInput" style="background:black; border:1px solid #00ff9f; color:#00ff9f;">
-  <button onclick="submitName()">CONFIRM</button>
-  </div>
 
   <br><br>
   <button id="enterBtn" onclick="goNext()">ENTER SYSTEM</button>
@@ -79,12 +74,6 @@
 
     let i = 0;
     let j = 0;
-
-    if (i === 2 && !window.nameEntered) {
-  document.getElementById("nameSection").style.display = "block";
-  window.nameEntered = true;
-  return;
-  }
 
     function typeLine() {
       if (i < text.length) {
@@ -110,19 +99,7 @@
 
       window.location.href = "main.html";
     }
-function submitName() {
-  const name = document.getElementById("nameInput").value.toLowerCase().trim();
 
-  if (name === "ahmad") {
-    document.getElementById("nameSection").style.display = "none";
-
-    document.getElementById("terminal").innerHTML += "Subject Ahmad identified.\n";
-
-    typeLine(); // continue typing
-  } else {
-    alert("ACCESS DENIED");
-  }
-}
     typeLine();
   </script>
 
