@@ -1,66 +1,130 @@
-<script>
-const text = [
-  "UMBRELLA CORPORATION SYSTEM",
-  "Initializing...",
-  "Loading subject data...",
-  "ERROR CODE: E001",
-  "",
-  "Cross-referencing date... Match found: [17th April 2008]",
-  "Re-evaluating...",
-  "Not a threat.",
-  "",
-  "You can now open the confidential file..."
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happiest Birthday</title>
 
-let i = 0;
-let j = 0;
-let waitingForName = false;
-
-function typeLine() {
-  // ⛔ PAUSE after "Initializing..."
-  if (i === 2 && !waitingForName) {
-    waitingForName = true;
-    document.getElementById("nameSection").style.display = "block";
-    return;
-  }
-
-  if (i < text.length) {
-    if (j < text[i].length) {
-      document.getElementById("terminal").innerHTML += text[i].charAt(j);
-      j++;
-      setTimeout(typeLine, 30);
-    } else {
-      document.getElementById("terminal").innerHTML += "\n";
-      i++;
-      j = 0;
-      setTimeout(typeLine, 500);
+  <style>
+    body {
+      background-color: black;
+      color: #00ff9f;
+      font-family: "Courier New", monospace;
+      padding: 40px;
     }
-  } else {
-    document.getElementById("enterBtn").style.display = "block";
-  }
-}
 
+    #terminal {
+      white-space: pre-line;
+      font-size: 18px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background: #00ff9f;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% {opacity: 1;}
+      50% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+
+    #enterBtn {
+      display: none;
+      margin-top: 30px;
+      padding: 10px 20px;
+      border: 2px solid #00ff9f;
+      background: black;
+      color: #00ff9f;
+      cursor: pointer;
+    }
+
+    #enterBtn:hover {
+      background: #00ff9f;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🎵 HIDDEN MUSIC PLAYER -->
+  <iframe id="musicFrame" width="0" height="0" style="display:none;"></iframe>
+
+  <div id="terminal"></div>
+  <span class="cursor"></span>
+  <div id="nameSection" style="display:none; margin-top:20px;">
+  > ENTER SUBJECT NAME:
+  <input type="text" id="nameInput" style="background:black; border:1px solid #00ff9f; color:#00ff9f;">
+  <button onclick="submitName()">CONFIRM</button>
+  </div>
+
+  <br><br>
+  <button id="enterBtn" onclick="goNext()">ENTER SYSTEM</button>
+
+  <script>
+    const text = [
+      "UMBRELLA CORPORATION SYSTEM",
+      "Initializing...",
+      "Loading subject data...",
+      "ERROR CODE: E001",
+      "",
+      "Cross-referencing date... Match found: [17th April 2008]",
+      "Re-evaluating...",
+      "Not a threat.",
+      "",
+      "You can now open the confidential file..."
+    ];
+
+    let i = 0;
+    let j = 0;
+
+    if (i === 2 && !window.nameEntered) {
+  document.getElementById("nameSection").style.display = "block";
+  window.nameEntered = true;
+  return;
+  }
+
+    function typeLine() {
+      if (i < text.length) {
+        if (j < text[i].length) {
+          document.getElementById("terminal").innerHTML += text[i].charAt(j);
+          j++;
+          setTimeout(typeLine, 30);
+        } else {
+          document.getElementById("terminal").innerHTML += "\n";
+          i++;
+          j = 0;
+          setTimeout(typeLine, 500);
+        }
+      } else {
+        document.getElementById("enterBtn").style.display = "block";
+      }
+    }
+
+    function goNext() {
+      // 🎵 ADA THEME (YouTube embed)
+      document.getElementById("musicFrame").src =
+        "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
+
+      window.location.href = "main.html";
+    }
 function submitName() {
   const name = document.getElementById("nameInput").value.toLowerCase().trim();
 
   if (name === "ahmad") {
     document.getElementById("nameSection").style.display = "none";
 
-    // OPTIONAL: adds one personalized line before continuing
     document.getElementById("terminal").innerHTML += "Subject Ahmad identified.\n";
 
-    typeLine(); // continue typing rest
+    typeLine(); // continue typing
   } else {
     alert("ACCESS DENIED");
   }
 }
+    typeLine();
+  </script>
 
-function goNext() {
-  document.getElementById("musicFrame").src =
-    "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
-
-  window.location.href = "main.html";
-}
-
-typeLine();
-</script>
+</body>
+</html>
