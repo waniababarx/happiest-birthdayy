@@ -44,6 +44,23 @@
       background: #00ff9f;
       color: black;
     }
+
+    #nameSection {
+      display: none;
+      margin-top: 20px;
+    }
+
+    input {
+      background: black;
+      border: 1px solid #00ff9f;
+      color: #00ff9f;
+      padding: 5px;
+    }
+
+    button.small {
+      margin-left: 10px;
+      padding: 5px 10px;
+    }
   </style>
 </head>
 
@@ -55,23 +72,22 @@
   <div id="terminal"></div>
   <span class="cursor"></span>
 
+  <!-- NAME INPUT -->
+  <div id="nameSection">
+    <br>
+    > ENTER SUBJECT NAME:
+    <input type="text" id="nameInput">
+    <button class="small" onclick="submitName()">CONFIRM</button>
+  </div>
+
   <br><br>
   <button id="enterBtn" onclick="goNext()">ENTER SYSTEM</button>
 
   <script>
-    const text = [
-  "UMBRELLA CORPORATION SYSTEM",
-  "Initializing...",
-  "Loading subject data...",
-  "ERROR CODE: E001",
-   "", 
-
-  "Cross-referencing date... Match found: [17th April 2008]",
-  "Re-evaluating...",
-  "Not a threat.",
-  "", 
-  "You can now open the confidential file..."
-];
+    let text = [
+      "UMBRELLA CORPORATION SYSTEM",
+      "Initializing..."
+    ];
 
     let i = 0;
     let j = 0;
@@ -89,12 +105,39 @@
           setTimeout(typeLine, 500);
         }
       } else {
-        document.getElementById("enterBtn").style.display = "block";
+        // show name input after initial text
+        document.getElementById("nameSection").style.display = "block";
+      }
+    }
+
+    function submitName() {
+      const name = document.getElementById("nameInput").value.toLowerCase().trim();
+
+      if (name === "ahmad") {
+
+        document.getElementById("nameSection").style.display = "none";
+
+        // continue system text
+        text = text.concat([
+          "Subject Ahmad identified.",
+          "Loading subject data...",
+          "ERROR CODE: E001",
+          "",
+          "Cross-referencing date... Match found: [17th April 2008]",
+          "Re-evaluating...",
+          "Not a threat.",
+          "",
+          "You can now open the confidential file..."
+        ]);
+
+        typeLine();
+
+      } else {
+        alert("ACCESS DENIED");
       }
     }
 
     function goNext() {
-      // 🎵 ADA THEME (YouTube embed)
       document.getElementById("musicFrame").src =
         "https://www.youtube.com/embed/8g6a1sZq6C8?autoplay=1&loop=1&playlist=8g6a1sZq6C8";
 
