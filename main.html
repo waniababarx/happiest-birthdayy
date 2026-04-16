@@ -259,10 +259,19 @@ function nextPage() {
 
 /* BOOT SCREEN AUTO HIDE */
 window.onload = function () {
-  setTimeout(() => {
-    const screen = document.getElementById("bootScreen");
+  const boot = sessionStorage.getItem("bootWarning");
+
+  const screen = document.getElementById("bootScreen");
+
+  if (boot === "true") {
+    setTimeout(() => {
+      if (screen) screen.style.display = "none";
+    }, 3000);
+
+    sessionStorage.removeItem("bootWarning");
+  } else {
     if (screen) screen.style.display = "none";
-  }, 3000);
+  }
 };
 </script>
 
